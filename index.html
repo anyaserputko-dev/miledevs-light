@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MILEDEVS — Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F7FB; --surface:#FFFFFF; --surface-2:#F2F1F8;
+  --ink:#0E0C1F; --ink-2:#4A4860; --muted:#85839A; --line:#E6E4EF;
+  --accent:#1800ad; --accent-hover:#2B17D9; --tint:#EFECFF; --tint-2:#E1DCFF;
+  --shadow:0 1px 2px rgba(14,12,31,.04),0 12px 32px -16px rgba(24,0,173,.18);
+  --r:16px; --gut:clamp(16px,4vw,40px);
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:var(--gut)}
+section{padding-block:clamp(56px,8vw,112px)}
+.label{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1.05}
+h2{font-size:clamp(32px,4.4vw,58px)}
+h3{font-size:19px;letter-spacing:-.01em;line-height:1.25;font-weight:600}
+.accent{color:var(--accent)}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* buttons */
+.cta{display:inline-flex;gap:6px;align-items:stretch}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:12px;background:var(--accent);color:#fff;font-weight:600;font-size:15px;transition:background .2s}
+.btn-sq{width:52px;height:52px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;transition:background .2s}
+.btn-sq svg{transition:transform .25s}
+.cta:hover .btn,.cta:hover .btn-sq{background:var(--accent-hover)}
+.cta:hover .btn-sq svg{transform:translate(2px,-2px)}
+.cta.white .btn,.cta.white .btn-sq{background:#fff;color:var(--accent)}
+.cta.white:hover .btn,.cta.white:hover .btn-sq{background:var(--tint)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;background:var(--tint);color:var(--accent);font-weight:600;font-size:14px;transition:background .2s,color .2s}
+.btn-ghost:hover{background:var(--accent);color:#fff}
+
+/* header */
+header{position:sticky;top:0;z-index:40;background:rgba(247,247,251,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+header.scrolled{border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.14em;font-size:15px}
+.logo img{height:26px;width:auto}
+.menu{display:flex;gap:36px;font-size:15px;color:var(--ink-2)}
+.menu a:hover{color:var(--accent)}
+.nav-r{display:flex;align-items:center;gap:20px}
+.lang{font:500 12px var(--mono);color:var(--muted)}
+.lang b{color:var(--ink);font-weight:500}
+.nav-cta{height:40px;padding:0 18px;border-radius:10px;background:var(--ink);color:#fff;font-size:14px;font-weight:600;display:inline-flex;align-items:center}
+.nav-cta:hover{background:var(--accent)}
+.burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);place-items:center}
+@media(max-width:900px){.menu,.nav-cta{display:none}.burger{display:grid}
+  .menu.open{display:flex;flex-direction:column;gap:18px;position:absolute;top:72px;left:0;right:0;background:var(--surface);padding:24px var(--gut);border-bottom:1px solid var(--line);font-size:18px}}
+
+/* hero */
+.hero{position:relative;padding-block:clamp(40px,6vw,88px) clamp(48px,7vw,96px)}
+.hero:before{content:"";position:absolute;inset:-72px 0 auto;height:720px;z-index:-1;
+  background:radial-gradient(520px 360px at 82% 30%,rgba(24,0,173,.13),transparent 70%),
+  radial-gradient(circle,rgba(24,0,173,.13) 1px,transparent 1.4px) 0 0/22px 22px;
+  -webkit-mask:linear-gradient(to bottom,#000 40%,transparent);mask:linear-gradient(to bottom,#000 40%,transparent)}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:500}
+.badge svg{width:16px;height:16px;color:var(--accent)}
+.hero h1{font-size:clamp(40px,5.9vw,84px);margin:28px 0 28px}
+.hero h1 span{display:block}
+.hero-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px}
+.hero p{max-width:440px;color:var(--ink-2);font-size:17px;margin-bottom:28px}
+.metrics{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.metric{height:36px;padding:0 14px;border-radius:99px;background:var(--surface-2);display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
+.metric b{color:var(--ink);font-weight:700}
+.hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,170px));gap:12px}
+.hs{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.hs b{display:block;font-size:40px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--accent)}
+.hs span{font-size:13px;color:var(--ink-2)}
+
+/* works */
+.sec-head{margin-bottom:40px}
+.sec-head .label{margin-bottom:14px;display:block}
+.works{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);min-width:0}
+.work .ph{aspect-ratio:4/3;overflow:hidden;background:var(--surface-2)}
+.work .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.work:hover .ph img{transform:scale(1.04)}
+.work .cap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px}
+.btn-ghost{white-space:nowrap}
+.work .cap h3{font-size:20px;letter-spacing:.06em}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:12px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--ink-2)}
+.tag.a{background:var(--tint);color:var(--accent)}
+.see-all{margin-top:20px;display:flex;gap:6px}
+.see-all a:first-child{flex:1;height:72px;border-radius:14px;background:var(--tint);color:var(--accent);display:flex;align-items:center;padding:0 28px;font-size:clamp(18px,2vw,24px);font-weight:500;transition:.2s}
+.see-all a:last-child{width:72px;height:72px;border-radius:14px;background:var(--accent);color:#fff;display:grid;place-items:center;transition:.2s}
+.see-all:hover a:first-child{background:var(--accent);color:#fff}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;align-items:flex-start;gap:18px;min-height:230px;transition:border-color .2s,box-shadow .2s,transform .2s;min-width:0}
+.svc:hover{border-color:var(--tint-2);box-shadow:var(--shadow);transform:translateY(-2px)}
+.svc .ic{width:56px;height:56px;border-radius:14px;background:var(--tint);color:var(--accent);display:grid;place-items:center}
+.svc .ic svg{width:26px;height:26px}
+.svc h3{flex:1}
+.svc-num{font:500 12px var(--mono);color:var(--muted);margin-left:auto}
+.svc-top{display:flex;width:100%;align-items:flex-start}
+
+/* who */
+.center{text-align:center}
+.who{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;min-width:0}
+.who .card{display:flex;flex-direction:column;gap:14px;min-height:200px}
+.who .card .n{font:500 12px var(--mono);color:var(--accent);display:flex;justify-content:space-between;align-items:center}
+.who .card .n svg{width:40px;height:40px;padding:9px;border-radius:12px;background:var(--tint)}
+.who .card p{font-size:14px;color:var(--ink-2);margin-top:auto}
+.who .ask{background:var(--ink);color:#fff;border-color:var(--ink);justify-content:space-between}
+.who .ask h3{font-size:clamp(26px,2.6vw,34px);font-weight:500;letter-spacing:-.03em;line-height:1.1}
+
+/* why */
+.panel{border-radius:28px;padding:clamp(24px,4vw,56px);position:relative;overflow:hidden}
+.why{background:var(--tint);border:1px solid var(--tint-2)}
+.why:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(24,0,173,.06) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(24,0,173,.06) 1px,transparent 1px) 0 0/40px 40px;-webkit-mask:radial-gradient(ellipse at 0 0,#000,transparent 75%);mask:radial-gradient(ellipse at 0 0,#000,transparent 75%)}
+.why>*{position:relative}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.why-grid .card{border-color:transparent;padding:28px}
+.why-grid .ic{width:44px;height:44px;border-radius:12px;border:1px solid var(--tint-2);color:var(--accent);display:grid;place-items:center;margin-bottom:22px}
+.why-grid h3{font-size:21px;margin-bottom:10px}
+.why-grid p{color:var(--ink-2);font-size:15px}
+
+/* results */
+.results{background:var(--surface);border:1px solid var(--line);margin-top:24px}
+.res-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.6fr);gap:16px;margin-top:36px}
+.stat{background:var(--surface-2);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;justify-content:space-between;min-height:180px;min-width:0}
+.stat b{font-size:clamp(40px,4.4vw,60px);font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--accent)}
+.stat b.sm{font-size:20px;letter-spacing:-.01em;line-height:1.25;font-weight:600;color:var(--ink)}
+.stat span{font-size:14px;color:var(--ink-2)}
+.res-cta{background:var(--accent);color:#fff;border-radius:var(--r);padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-width:0}
+.res-cta p{font-size:20px;line-height:1.35;font-weight:500}
+
+/* workflow */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;min-height:220px;display:flex;flex-direction:column;position:relative;min-width:0}
+.step:nth-child(2){margin-top:90px}.step:nth-child(3){margin-top:180px}.step:nth-child(4){margin-top:270px}
+.step .label{color:var(--accent)}
+.step h3{font-size:22px;margin-top:12px}
+.step .ic{margin-top:auto;width:44px;height:44px;border-radius:12px;background:var(--tint);color:var(--accent);display:grid;place-items:center}
+.step.last{background:var(--accent);border-color:var(--accent);color:#fff}
+.step.last .label{color:#C9C2FF}.step.last .ic{background:rgba(255,255,255,.14);color:#fff}
+.tl-row{display:grid;grid-template-columns:minmax(0,2.6fr) minmax(0,1fr);gap:16px;margin-top:24px}
+.tl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+.tl div{background:var(--surface-2);border-radius:14px;padding:20px}
+.tl span{font-size:13px;color:var(--ink-2)}
+.tl b{display:block;font-size:clamp(26px,2.6vw,36px);font-weight:500;letter-spacing:-.03em;line-height:1.1;margin-top:14px}
+.faster{background:var(--ink);color:#fff;border-color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.faster .label{color:#9C99B5}
+.faster h3{font-size:clamp(30px,3vw,42px);font-weight:500;letter-spacing:-.03em;line-height:1.05}
+
+/* stories */
+.stories{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.5fr);gap:16px;align-items:start}
+.stories .lead{position:sticky;top:96px;background:var(--ink);color:#fff;border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:32px;min-height:300px;justify-content:space-between}
+.stories .lead h3{font-size:clamp(28px,2.8vw,38px);font-weight:500;letter-spacing:-.03em;line-height:1.08}
+.quotes{display:grid;gap:16px}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center}
+.quote blockquote{font-size:clamp(19px,2vw,26px);line-height:1.35;letter-spacing:-.015em;font-weight:500}
+.who-q{display:flex;align-items:center;gap:12px;margin-top:22px}
+.who-q img{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top}
+.who-q b{display:block;font-size:14px;font-weight:600}
+.who-q span{font-size:13px;color:var(--muted)}
+.kpi{min-width:170px;padding-left:32px;border-left:1px solid var(--line)}
+.kpi b{display:block;font-size:clamp(44px,5vw,68px);font-weight:500;letter-spacing:-.05em;line-height:1;color:var(--accent)}
+.kpi span{font-size:14px;color:var(--ink-2);display:block;margin-top:8px;max-width:150px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.3fr);gap:48px}
+.faq h2{margin:14px 0 16px}
+.faq-l p{color:var(--ink-2);font-size:15px;max-width:300px}
+.faq-l a{display:inline-flex;gap:8px;align-items:center;margin-top:24px;font-weight:600;color:var(--accent)}
+details{border-top:1px solid var(--line)}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;font-size:18px;font-weight:500;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+summary i{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none;transition:.25s;font-style:normal;color:var(--ink-2)}
+details[open] summary i{background:var(--accent);border-color:var(--accent);color:#fff;transform:rotate(45deg)}
+details p{padding:0 0 26px;color:var(--ink-2);max-width:680px}
+
+/* final */
+.final{background:var(--accent);color:#fff;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:center}
+.final:before{content:"";position:absolute;right:-120px;top:-160px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%)}
+.final>*{position:relative}
+.final h2{font-size:clamp(36px,5vw,68px);margin-bottom:32px}
+.nos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.no{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:20px;min-height:170px;display:flex;flex-direction:column;gap:18px;font-weight:600;line-height:1.3}
+.no.yes{background:#fff;color:var(--accent)}
+
+/* footer */
+footer{padding-block:64px 32px}
+.f-top{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(2,minmax(0,1fr));gap:40px;padding-bottom:48px;border-bottom:1px solid var(--line)}
+.f-top img{height:64px;width:auto;margin-bottom:20px}
+.f-top p{color:var(--ink-2);max-width:340px;font-size:15px}
+.f-top h4{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+.f-top ul{list-style:none;display:grid;gap:10px}
+.f-top li a:hover{color:var(--accent)}
+.f-bot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:24px;font-size:13px;color:var(--muted)}
+
+/* modal */
+dialog{border:0;border-radius:24px;padding:0;width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 48px);background:var(--surface);color:var(--ink);box-shadow:0 40px 80px -20px rgba(14,12,31,.35);margin:auto}
+dialog::backdrop{background:rgba(14,12,31,.45);backdrop-filter:blur(4px)}
+.m-in{padding:32px}
+.m-x{position:absolute;right:16px;top:16px;width:36px;height:36px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center}
+dialog h3{font-size:26px;font-weight:500;letter-spacing:-.02em;padding-right:40px}
+.m-sub{color:var(--ink-2);font-size:14px;margin:8px 0 22px}
+.m-list{list-style:none;display:grid;gap:14px;margin:22px 0 28px;counter-reset:s}
+.m-list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:14px;color:var(--ink-2)}
+.m-list li:before{counter-increment:s;content:counter(s,decimal-leading-zero);font:500 12px/1.9 var(--mono);color:var(--accent)}
+.m-list b{color:var(--ink);font-weight:600}
+form{display:grid;gap:12px}
+input,select{width:100%;height:52px;border-radius:12px;border:1px solid var(--line);background:var(--bg);padding:0 16px;font:inherit;font-size:15px;color:var(--ink)}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.chk{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--ink-2)}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+form .btn{justify-content:center;width:100%}
+.sent{text-align:center;padding:20px 0}
+.sent .ok{width:64px;height:64px;border-radius:50%;background:var(--tint);color:var(--accent);display:grid;place-items:center;margin:0 auto 18px}
+
+/* responsive */
+@media(max-width:1100px){
+  .services,.who,.why-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .res-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.res-cta{grid-column:1/-1}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step:nth-child(n){margin-top:0}
+  .tl-row,.stories,.faq,.final{grid-template-columns:minmax(0,1fr)}
+  .stories .lead{position:static;min-height:0}
+}
+@media(max-width:640px){
+  .works,.services,.who,.why-grid,.steps,.res-grid,.tl,.nos,.f-top{grid-template-columns:minmax(0,1fr)}
+  .quote{grid-template-columns:minmax(0,1fr)}.kpi{padding:20px 0 0;border-left:0;border-top:1px solid var(--line)}
+  .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+  .svc{min-height:0}.no{min-height:0}.who .card{min-height:0}.step{min-height:0}.step .ic{margin-top:24px}
+  .see-all a:first-child,.see-all a:last-child{height:60px}.see-all a:last-child{width:60px}
+  .btn{height:48px;padding:0 18px}.btn-sq{width:48px;height:48px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="arr" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+    <symbol id="pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="puzzle" viewBox="0 0 24 24"><path d="M10 4a2 2 0 1 1 4 0v2h4v4h-2a2 2 0 1 0 0 4h2v4h-4v-2a2 2 0 1 0-4 0v2H6v-4h2a2 2 0 1 0 0-4H6V6h4V4Z"/></symbol>
+    <symbol id="gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"/><path d="m12 16 4-5"/><circle cx="12" cy="16" r="1.2"/></symbol>
+    <symbol id="audit" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="m8 15 3-4 3 2 4-6"/><circle cx="17" cy="16" r="2.5"/><path d="m19 18 2 2"/></symbol>
+    <symbol id="buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/><path d="m6.3 6.3 3.4 3.4m4.6 4.6 3.4 3.4m0-11.4-3.4 3.4m-4.6 4.6-3.4 3.4"/></symbol>
+    <symbol id="swap" viewBox="0 0 24 24"><path d="M4 8h14l-3-3M20 16H6l3 3"/></symbol>
+    <symbol id="cog" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-14.3 5M4 12a8 8 0 0 1 14.3-5"/><path d="M18.5 3v4h-4M5.5 21v-4h4"/></symbol>
+    <symbol id="mega" viewBox="0 0 24 24"><path d="M4 10v4h3l8 4V6L7 10H4Z"/><path d="M18 9.5a3.5 3.5 0 0 1 0 5M8 14l1 5h2.5"/></symbol>
+    <symbol id="insta" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".6"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+    <symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21 20c0-2.6-1.6-4.8-4-5.6"/></symbol>
+    <symbol id="layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></symbol>
+    <symbol id="link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="m8.5 13.5-1.5 7 5-2.5 5 2.5-1.5-7"/></symbol>
+    <symbol id="target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="zap" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6l1-7Z"/></symbol>
+    <symbol id="chat" viewBox="0 0 24 24"><path d="M5 5h14v10H10l-5 4V5Z"/></symbol>
+    <symbol id="shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></symbol>
+    <symbol id="rocket" viewBox="0 0 24 24"><path d="M14 4c3.5 0 6 2.5 6 6-1.5 3.5-5 7-8 8l-6-6c1-3 4.5-6.5 8-8Z"/><circle cx="14.5" cy="9.5" r="1.6"/><path d="M6 12H3l3-4h4M12 18v3l4-3v-4"/></symbol>
+    <symbol id="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="shop" viewBox="0 0 24 24"><path d="M6 7h12l-1.2 13H7.2L6 7Z"/><path d="M9.5 7V5.5a2.5 2.5 0 0 1 5 0V7"/><path d="M13.6 11.2c-.4-.4-1-.6-1.6-.6-1 0-1.7.5-1.7 1.3 0 1.8 3.6 1 3.6 3 0 .8-.8 1.4-1.9 1.4-.7 0-1.4-.3-1.8-.7"/></symbol>
+    <symbol id="star" viewBox="0 0 24 24"><path d="m12 4 2.4 5 5.4.6-4 3.7 1.1 5.4L12 16l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6L12 4Z"/></symbol>
+  </defs>
+</svg>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#" class="logo"><img src="img/logo-mono.png" alt="">MILEDEVS</a>
+    <nav class="menu" id="menu">
+      <a href="#works">portfolio</a><a href="#">blog</a><a href="#services">services</a><a href="#">products</a><a href="#why">about us</a><a href="#faq">contact</a>
+    </nav>
+    <div class="nav-r">
+      <span class="lang"><b>EN</b> | UK</span>
+      <button class="nav-cta" data-consult>Let's talk</button>
+      <button class="burger" id="burger" aria-label="Menu"><svg class="i"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="badges">
+        <span class="badge"><svg class="i"><use href="#shop"/></svg>Shopify Selected Partner</span>
+        <span class="badge"><svg class="i"><use href="#star"/></svg>Top Rated</span>
+      </div>
+      <h1><span>We turn your Shopify store</span> <span class="accent">into a revenue machine</span></h1>
+      <div class="hero-row">
+        <div>
+          <p>Full-cycle Shopify development — from design to launch. We build stores that convert, not just look good.</p>
+          <div class="cta"><button class="btn" data-consult>Get Free Consultation</button><button class="btn-sq" data-consult aria-label="Get Free Consultation"><svg class="i"><use href="#arr"/></svg></button></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><b>100+</b><span>stores built</span></div>
+          <div class="hs"><b>5+</b><span>years on Shopify</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">Selected Works</span><h2>Projects That Speak for Themselves</h2></div>
+      <div class="works">
+        <article class="work"><div class="ph"><img src="img/lunesi.jpg" alt="LUNESI" loading="lazy"></div>
+          <div class="cap"><div><h3>LUNESI</h3><div class="tags"><span class="tag a">Shopify</span><span class="tag">Fashion &amp; Luxury</span><span class="tag">Full-Cycle Development</span></div></div><a class="btn-ghost" href="#">View Details <svg class="i" style="width:16px;height:16px"><use href="#arr"/></svg></a></div></article>
+        <article class="work"><div class="ph"><img src="img/joyfolie.jpg" alt="JOYFOLIE" loading="lazy"></div>
+          <div class="cap"><div><h3>JOYFOLIE</h3><div class="tags"><span class="tag a">Shopify</span><span class="tag">Fashion &amp; Footwear</span><span class="tag">Full-Cycle Development</span></div></div><a class="btn-ghost" href="#">View Details <svg class="i" style="width:16px;height:16px"><use href="#arr"/></svg></a></div></article>
+        <article class="work"><div class="ph"><img src="img/rinfit.jpg" alt="RINFIT" loading="lazy"></div>
+          <div class="cap"><div><h3>RINFIT</h3><div class="tags"><span class="tag a">Shopify</span><span class="tag">Accessories</span><span class="tag">Full-Cycle Development</span></div></div><a class="btn-ghost" href="#">View Details <svg class="i" style="width:16px;height:16px"><use href="#arr"/></svg></a></div></article>
+        <article class="work"><div class="ph"><img src="img/carbon.jpg" alt="CARBON" loading="lazy" style="object-position:center 60%"></div>
+          <div class="cap"><div><h3>CARBON</h3><div class="tags"><span class="tag a">Shopify</span><span class="tag">Automotive</span><span class="tag">Full-Cycle Development</span></div></div><a class="btn-ghost" href="#">View Details <svg class="i" style="width:16px;height:16px"><use href="#arr"/></svg></a></div></article>
+      </div>
+      <div class="see-all"><a href="#">see all projects</a><a href="#" aria-label="see all projects"><svg class="i"><use href="#arr"/></svg></a></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" style="background:var(--surface);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head"><span class="label">Our Services</span><h2 style="max-width:22ch">Professional services tailored to your business needs</h2></div>
+      <div class="services" id="svcGrid"></div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head center"><span class="label">[Who We Help]</span><h2>Who We Work With</h2></div>
+      <div class="who">
+        <div class="card"><span class="n">[01]<svg class="i"><use href="#bag"/></svg></span><h3>Brands That Sell Online</h3><p>From startups to multi-million-dollar businesses.</p></div>
+        <div class="card"><span class="n">[02]<svg class="i"><use href="#trend"/></svg></span><h3>Businesses Serious About Growth</h3><p>If you want a site that converts, we’re the right fit.</p></div>
+        <div class="card"><span class="n">[03]<svg class="i"><use href="#users"/></svg></span><h3>Founders &amp; Teams Seeking Expert Guidance</h3><p>No DIY struggles; just real results.</p></div>
+        <div class="card"><span class="n">[04]<svg class="i"><use href="#layers"/></svg></span><h3>Projects of All Sizes</h3><p>From minor tweaks to major builds, no job is too small or too complex.</p></div>
+        <div class="card"><span class="n">[05]<svg class="i"><use href="#link"/></svg></span><h3>Agencies &amp; Partners</h3><p>Looking for a reliable partner to deliver quality work.</p></div>
+        <div class="card ask"><h3>Does that sound like you?</h3><div class="cta"><button class="btn" data-consult>let's talk</button><button class="btn-sq" data-consult aria-label="let's talk"><svg class="i"><use href="#arr"/></svg></button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY + RESULTS -->
+  <section id="why" style="padding-top:0">
+    <div class="wrap">
+      <div class="panel why">
+        <div class="sec-head"><span class="label">Why MILEDEVS</span><h2>Why clients choose us</h2></div>
+        <div class="why-grid">
+          <div class="card"><div class="ic"><svg class="i"><use href="#award"/></svg></div><h3>5+ Years of Experience</h3><p>Shopify Select Partner with a proven track record across various niches.</p></div>
+          <div class="card"><div class="ic"><svg class="i"><use href="#target"/></svg></div><h3>Results-Driven Approach</h3><p>Built for conversions, AOV growth, and long-term revenue — not just aesthetics.</p></div>
+          <div class="card"><div class="ic"><svg class="i"><use href="#puzzle"/></svg></div><h3>Custom Solutions</h3><p>Every project custom-built to match your brand and business goals.</p></div>
+          <div class="card"><div class="ic"><svg class="i"><use href="#zap"/></svg></div><h3>Fast Turnaround</h3><p>From brief to live store in 2–4 weeks. We hit deadlines, no excuses.</p></div>
+          <div class="card"><div class="ic"><svg class="i"><use href="#chat"/></svg></div><h3>Transparent Communication</h3><p>Clear status updates and defined next steps — no waiting in the dark.</p></div>
+          <div class="card"><div class="ic"><svg class="i"><use href="#shield"/></svg></div><h3>Post-Launch Support</h3><p>We stay after launch — updates, optimization, and growth support included.</p></div>
+        </div>
+      </div>
+
+      <div class="panel results">
+        <h2>The Results Speak For Themselves</h2>
+        <div class="res-grid">
+          <div class="stat"><b>+38%</b><span>Growth in Online Sales</span></div>
+          <div class="stat"><b>-12%</b><span>Bounce Rate</span></div>
+          <div class="stat"><b class="sm">Faster, Easier Site Updates</b><span>No Developer Needed</span></div>
+          <div class="res-cta"><p>We've assisted companies similar to yours in optimizing earnings from each site visitor</p><div class="cta white"><a class="btn" href="#stories">see real case studies</a><a class="btn-sq" href="#stories" aria-label="see real case studies"><svg class="i"><use href="#arr"/></svg></a></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKFLOW -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center"><span class="label">How we work</span><h2>Our Project Workflow</h2></div>
+      <div class="steps">
+        <div class="step"><span class="label">step 01</span><h3>Consultation &amp; Briefing</h3><div class="ic"><svg class="i"><use href="#search"/></svg></div></div>
+        <div class="step"><span class="label">step 02</span><h3>Strategy &amp; Planning</h3><div class="ic"><svg class="i"><use href="#pen"/></svg></div></div>
+        <div class="step"><span class="label">step 03</span><h3>Creation &amp; Implementation</h3><div class="ic"><svg class="i"><use href="#code"/></svg></div></div>
+        <div class="step last"><span class="label">step 04</span><h3>Launch &amp; Support</h3><div class="ic"><svg class="i"><use href="#rocket"/></svg></div></div>
+      </div>
+      <div class="tl-row">
+        <div class="card"><h3 style="font-size:22px">Timelines</h3>
+          <div class="tl"><div><span>Small Fixes:</span><b>24-72 hours</b></div><div><span>Redesigns:</span><b>2-4 weeks</b></div><div><span>Full Builds:</span><b>4-8 weeks</b></div></div>
+        </div>
+        <div class="card faster"><span class="label">[cta]</span><h3>Need it faster?</h3><div class="cta white"><button class="btn" data-consult>let's talk</button><button class="btn-sq" data-consult aria-label="let's talk"><svg class="i"><use href="#arr"/></svg></button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section id="stories" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head center"><span class="label">Testimonials</span><h2>Client Success Stories</h2></div>
+      <div class="stories">
+        <div class="lead"><h3>Want Results Like These?</h3><div class="cta"><button class="btn" data-consult>let's talk</button><button class="btn-sq" data-consult aria-label="let's talk"><svg class="i"><use href="#arr"/></svg></button></div></div>
+        <div class="quotes">
+          <div class="quote"><div><blockquote>They didn't just build a Shopify store — they built a system that actually sells. From UX to checkout flow, every detail felt intentional.</blockquote><div class="who-q"><img src="img/av3.jpg" alt=""><div><b>Daniel Foster</b><span>Founder · North &amp; Co.</span></div></div></div><div class="kpi"><b>+52%</b><span>conversion rate</span></div></div>
+          <div class="quote"><div><blockquote>We came in with a messy catalog and zero structure. The team reorganized everything, optimized the store, and delivered a clean, premium experience that finally matches our brand.</blockquote><div class="who-q"><img src="img/av1.jpg" alt=""><div><b>Isabella Moretti</b><span>Head of E-commerce · Luma Skin</span></div></div></div><div class="kpi"><b>1.9x</b><span>increase in average order value</span></div></div>
+          <div class="quote"><div><blockquote>Fast, precise, and incredibly easy to work with. They understood our market, handled the technical side, and delivered a Shopify store that performs as good as it looks.</blockquote><div class="who-q"><img src="img/av2.jpg" alt=""><div><b>Marcus Reed</b><span>CEO · Field Supply Co.</span></div></div></div><div class="kpi"><b>+63%</b><span>growth in online revenue</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:0">
+    <div class="wrap faq">
+      <div class="faq-l"><span class="label">FAQ</span><h2>Common questions</h2><p>Everything you need to know before we start working together.</p><a href="#" data-consult>Ask a question <svg class="i" style="width:18px;height:18px"><use href="#arr"/></svg></a></div>
+      <div>
+        <details open><summary>How long does it take to build a Shopify store?<i>+</i></summary><p>Most projects launch within 2–4 weeks from the brief. The exact timeline depends on scope — a focused redesign or new build with clear requirements moves fast. We share a detailed project timeline before we start, so you always know what to expect.</p></details>
+        <details><summary>Do you work with existing stores or only new builds?<i>+</i></summary><p>Both. We handle full builds from scratch, redesigns of existing stores, performance optimization, migration from other platforms to Shopify, and ongoing development. If your store needs improvement — we'll find the most efficient path to get there.</p></details>
+        <details><summary>What makes MILEDEVS different from other Shopify developers?<i>+</i></summary><p>We're a Shopify Select Partner — a status given to a small number of agencies worldwide. More importantly, we focus on business outcomes, not just deliverables. Every decision we make is tied to conversions, average order value, and long-term growth. No templates, no guesswork.</p></details>
+        <details><summary>How do you make sure the store actually converts?<i>+</i></summary><p>We apply proven CRO principles from day one — clear hierarchy, fast load times, trust signals, and optimized checkout flow. We've built and improved dozens of stores across various niches and know what drives purchasing decisions. Results are measurable, not assumed.</p></details>
+        <details><summary>What's included in post-launch support?<i>+</i></summary><p>After launch, we stay available for bug fixes, minor updates, and technical questions at no extra charge for an agreed period. Beyond that, we offer ongoing retainer support for stores that need regular updates, A/B testing, new feature development, or performance monitoring.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="panel final">
+        <div><h2>Fix, build, or scale your store.</h2><div class="cta white"><button class="btn" data-consult>get started now</button><button class="btn-sq" data-consult aria-label="get started now"><svg class="i"><use href="#arr"/></svg></button></div></div>
+        <div class="nos">
+          <div class="no"><svg class="i"><use href="#x"/></svg>No long proposals.</div>
+          <div class="no"><svg class="i"><use href="#x"/></svg>No wasted time.</div>
+          <div class="no yes"><svg class="i"><use href="#check"/></svg>Just expert execution that drives results.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div><img src="img/logo-full.png" alt="MILEDEVS"><p>Shopify development, support, and optimization for stable sales and profit growth.</p>
+        <div class="badges" style="margin-top:20px"><span class="badge"><svg class="i"><use href="#shop"/></svg>Shopify Selected Partner</span><span class="badge"><svg class="i"><use href="#star"/></svg>Top Rated</span></div></div>
+      <div><h4>Navigation</h4><ul><li><a href="#">home page</a></li><li><a href="#services">services</a></li><li><a href="#works">portfolio</a></li><li><a href="#">products</a></li><li><a href="#why">about us</a></li><li><a href="#faq">contact</a></li><li><a href="#">blog</a></li><li><a href="#">resources</a></li></ul></div>
+      <div><h4>Contacts</h4><ul><li><a href="https://t.me/shopify_evgene" target="_blank" rel="noopener">Telegram</a></li><li><a href="https://wa.me/380730071077" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:miledevelopment@gmail.com">miledevelopment@gmail.com</a></li></ul></div>
+    </div>
+    <div class="f-bot"><span>© 2026 MILEDEVS. All rights reserved.</span><span class="lang"><b>EN</b> | UK</span></div>
+  </div>
+</footer>
+
+<!-- service modal -->
+<dialog id="svcDlg"><div class="m-in" style="position:relative">
+  <button class="m-x" data-close aria-label="Close"><svg class="i" style="width:18px;height:18px"><use href="#x"/></svg></button>
+  <span class="label" id="svcNum"></span><h3 id="svcTitle" style="margin-top:10px"></h3>
+  <ol class="m-list" id="svcList"></ol>
+  <div class="cta"><button class="btn" data-consult>Order Service</button><button class="btn-sq" data-consult aria-label="Order Service"><svg class="i"><use href="#arr"/></svg></button></div>
+</div></dialog>
+
+<!-- consult modal -->
+<dialog id="conDlg"><div class="m-in" style="position:relative">
+  <button class="m-x" data-close aria-label="Close"><svg class="i" style="width:18px;height:18px"><use href="#x"/></svg></button>
+  <div id="conForm">
+    <span class="label">Contact us</span><h3 style="margin-top:10px">Get Free Consultation</h3>
+    <p class="m-sub">Fill out the form — we'll respond within 1 hour</p>
+    <form id="form">
+      <select required><option value="" disabled selected>How much are you ready to invest?</option><option>Under $1,000</option><option>$1,000 – $3,000</option><option>$3,000 – $8,000</option><option>$8,000 – $20,000</option><option>$20,000+</option><option>Not sure yet</option></select>
+      <input required placeholder="Your name">
+      <input required type="email" placeholder="Email">
+      <input placeholder="Telegram or WhatsApp (optional)">
+      <label class="chk"><input type="checkbox" required> I agree with the Privacy Policy</label>
+      <button class="btn" type="submit">Get Free Consultation</button>
+    </form>
+  </div>
+  <div class="sent" id="conSent" hidden><div class="ok"><svg class="i" style="width:28px;height:28px"><use href="#check"/></svg></div><h3 style="padding:0">Request sent!</h3><p class="m-sub">We'll get back to you within 1 hour. Check your Telegram or email.</p></div>
+</div></dialog>
+
+<script>
+const S=[
+ ["bag","Shopify Store Setup From Scratch",[["Initial consultation","We clarify your goals, target audience, required features and timelines."],["Theme selection or custom build","We help you decide whether to use a premium theme or create a fully custom one from scratch."],["Design and customization","We design and customize layouts, sections and UX so the store looks consistent with your brand."],["App integration","We connect and configure essential apps to extend your store’s functionality."],["Shipping and payment setup","We configure shipping zones, rates, taxes and payment gateways for a smooth checkout."],["Content and product setup","We structure collections, add products, and format copy and visuals."],["Documentation and training","We prepare simple documentation and give you clear instructions."],["Post‑launch support","We monitor the first period after launch and fine‑tune based on user behavior."]]],
+ ["pen","Custom Shopify Store Design",[["Brand and audience analysis","We study your visual identity, values and target audience to understand how your store should feel and communicate."],["UX strategy","We define user flows, key pages and navigation logic to make the journey from landing to checkout intuitive."],["Custom visual concepts","We design custom layouts, typography, color system and components aligned with your brand."],["Responsive design","We ensure the store looks and works perfectly on mobile, tablet and desktop."],["Design handoff and implementation","We convert the design into a functional Shopify theme or adapt your existing theme to match the new style."],["Testing and adjustments","We test usability, fix visual inconsistencies and refine details based on your feedback."]]],
+ ["puzzle","App Integration for Shopify",[["Business needs discovery","We analyze your operations: inventory, logistics, marketing, customer service, analytics and more."],["App research and selection","We choose the most suitable apps for your goals (inventory, shipping, subscriptions, loyalty, reviews, email, etc.)."],["Configuration and customization","We configure each app for your workflows, adjust settings and connect it to your existing systems where possible."],["Technical integration","We integrate apps with your theme and data, making sure they work together without conflicts."],["Testing and QA","We check how apps affect performance, UX and checkout, and fix any issues."],["Training and documentation","We show your team how to use the apps effectively and document key processes."]]],
+ ["gauge","Performance Optimization",[["Technical performance audit","We review load times, server response, blocking resources and theme structure to identify bottlenecks."],["Image optimization","We compress and convert images to modern formats, set up lazy loading and optimize media for different devices."],["Code optimization","We clean up and minify CSS, JavaScript and HTML, remove unused scripts and reduce unnecessary requests."],["Browser caching setup","We configure caching so returning visitors see your site faster."],["CDN implementation","We connect and configure a Content Delivery Network so assets load from the nearest servers worldwide."],["Mobile performance tuning","We check performance on mobile devices and optimize for fast loading and smooth interaction."],["Final report","We provide a before/after overview with clear results and recommendations for maintaining performance."]]],
+ ["audit","Conversion & UX Optimization Audit",[["Store analysis","We review structure, navigation, product pages, cart and checkout to spot friction points."],["User behavior review","We analyze how visitors move through the site and where they drop off."],["Purchase path optimization","We propose ways to shorten and simplify the path to purchase, from first click to order confirmation."],["Content and messaging review","We evaluate product copy, visuals, CTAs and trust elements, and suggest improvements for clarity and persuasion."],["Technical and speed check","We identify technical issues that affect experience and conversions."],["Actionable report","We deliver a structured report with prioritized recommendations and next steps."]]],
+ ["buoy","Ongoing Support and Maintenance",[["Onboarding and status review","We review your current setup, pain points and priorities for ongoing work."],["Bug fixing and troubleshooting","We quickly diagnose and resolve technical issues, theme conflicts and app errors."],["Third‑party app updates","We safely update and reconfigure third‑party apps to keep everything working smoothly."],["Functional and design updates","We implement new features, sections and design tweaks to keep your store modern and effective."],["Monitoring and mini‑audits","We periodically review performance and UX to catch problems early."],["Regular communication","We agree on a communication format (tickets, chat, calls) and keep you informed about all changes."]]],
+ ["swap","Platform Migration to Shopify",[["Migration planning","We clarify what needs to be migrated: customers, orders, products, collections, pages and more."],["Data export and cleanup","We export data from your current platform and clean it so it fits Shopify’s structure."],["Customer data migration","We import customer accounts and details while respecting privacy and security requirements."],["Order history migration","We transfer past orders so you keep a full purchase history."],["Product and collection migration","We move product details, images, variants and rebuild your collection structure."],["Theme and design setup","We configure a new design on Shopify that reflects your previous branding or improves it."],["Testing and launch","We test all key flows and then switch traffic to the new Shopify store with minimal downtime."]]],
+ ["cog","Shopify Automation",[["Process mapping","We analyze your current workflows: order processing, fulfillment, emails, customer service, inventory and marketing."],["Tools and flow selection","We choose the right automation tools (Shopify Flow, Klaviyo, email platforms, CRM and others) and define which steps to automate."],["Workflow setup","We create automated flows for tasks like order status emails, abandoned carts, post‑purchase follow‑ups, customer segmentation and internal notifications."],["Data integration","We connect apps and systems so data moves automatically between them without manual work."],["Testing and optimization","We test each automation, monitor the first results and improve logic where needed."],["Training and handover","We explain how the automations work, how to edit them and what metrics to track."]]],
+ ["mega","Facebook Ads Setup and Management",[["Business and audience research","We study your offer, positioning and target audience to define clear advertising goals."],["Strategy development","We build a funnel strategy: awareness, consideration and conversion campaigns tailored to your budget."],["Technical setup","We configure Business Manager, pixels, events and conversions tracking."],["Creative production and campaign launch","We create compelling ad creatives and copy, structure campaigns and ad sets, and launch them."],["Optimization and scaling","We analyze results, test audiences and creatives, and scale the best‑performing campaigns."],["Reporting and insights","We provide clear reports with conclusions and practical recommendations for business growth."]]],
+ ["insta","Social Media Marketing (SMM)",[["Strategy & audience research","We define your brand voice, target audience and the platforms that fit your store."],["Content & creatives","We build a monthly content calendar with scroll-stopping posts, reels and stories designed to sell."],["Publishing & community","We post consistently and engage your audience to grow reach, followers and trust."],["Reporting & growth","Monthly analytics on reach, engagement and conversions, with continuous optimization."]]],
+ ["search","Search Engine Optimization (SEO)",[["Technical SEO","Site speed, crawlability, schema and clean indexation so Google (and AI search) can read and rank your store."],["On-page optimization","Keyword-mapped titles, meta and content built around real buyer intent across your key pages."],["External link building","Quality backlinks from relevant, authoritative sites to grow your domain authority and rankings."],["Reporting & growth","Monthly tracking of rankings, organic traffic and conversions, with continuous optimization."]]]
+];
+const pad=n=>String(n).padStart(2,"0");
+const grid=document.getElementById("svcGrid");
+S.forEach(([ic,t],i)=>{
+  grid.insertAdjacentHTML("beforeend",`<div class="svc"><div class="svc-top"><div class="ic"><svg class="i"><use href="#${ic}"/></svg></div><span class="svc-num">${pad(i+1)}</span></div><h3>${t.replace("&","&amp;")}</h3><button class="btn-ghost" data-svc="${i}">Learn more <svg class="i" style="width:16px;height:16px"><use href="#arr"/></svg></button></div>`);
+});
+const svcDlg=document.getElementById("svcDlg"),conDlg=document.getElementById("conDlg");
+document.addEventListener("click",e=>{
+  const s=e.target.closest("[data-svc]"),c=e.target.closest("[data-consult]"),x=e.target.closest("[data-close]");
+  if(s){const [,t,list]=S[+s.dataset.svc];
+    document.getElementById("svcNum").textContent="service "+pad(+s.dataset.svc+1);
+    document.getElementById("svcTitle").textContent=t;
+    document.getElementById("svcList").innerHTML=list.map(([b,d])=>`<li><span><b>${b}</b> — ${d}</span></li>`).join("");
+    svcDlg.showModal();}
+  if(c){e.preventDefault();svcDlg.open&&svcDlg.close();document.getElementById("conForm").hidden=false;document.getElementById("conSent").hidden=true;conDlg.showModal();}
+  if(x){x.closest("dialog").close();}
+});
+[svcDlg,conDlg].forEach(d=>d.addEventListener("click",e=>{if(e.target===d)d.close()}));
+document.getElementById("form").addEventListener("submit",e=>{e.preventDefault();document.getElementById("conForm").hidden=true;document.getElementById("conSent").hidden=false;});
+document.getElementById("burger").addEventListener("click",()=>document.getElementById("menu").classList.toggle("open"));
+const hdr=document.getElementById("hdr");addEventListener("scroll",()=>hdr.classList.toggle("scrolled",scrollY>8),{passive:true});
+</script>
+</body>
+</html>
